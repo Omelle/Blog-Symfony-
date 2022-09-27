@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html class= "h-100">
+    <head>
+        <meta charset="UTF-8">
+         <title>{% block title %}SymfonyBlog {% endblock %}</title>
+        {% block stylesheets %}
+        <!---Boostrap Core CSS-->
+        <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
+    <!-- Custom styles for this template -->
+    <style>
+        main > .container {
+            padding: 60px 15px 0; 
+        }
+    </style>
+ 
+<style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+     {% endblock %}
+  </head>
+
+    
+  <body class="d-flex flex-column h-100">
+    {% include 'layout/header.html.twig'%}
+
+
+<!-- Begin page content -->
+<main class="flex-shrink-0">
+  <div class="container">
+    {% block body %}{% endblock %}
+  </div>
+</main>
+
+{% include 'layout/footer.html.twig'%}
+
+ {% block javascripts %}
+        <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+        {% endblock %}
+</body>
+</html>

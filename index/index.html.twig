@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %} 
+
+{% block title %} Bulletin - {{parent() }}{% endblock %}
+
+{% block body %}
+<div style="max-width: 800px; margin: auto;"> 
+<h1 class="display-2" style ="margin-bottom: 50px;"> Liste des Bulletins </h1>
+<a href="{{path('bulletin_generate')}}"class="btn btn-danger" type="button"> Générer Bulletin </a>
+<a href="{{path('bulletin_create')}}"class="btn btn-success" type="button"> créer Bulletin </a>
+{% for bulletin in bulletins %}
+<div class="alert alert-{{ bulletin.categoryType }}" style="margin-top:20px;"> 
+<h3 class="display-5">{{ bulletin.title }}</h3>
+<p class="h3">{{ bulletin.category }}</p>
+<p> {{ bulletin.content|nl2br }}</p>
+<p>
+<b>Tags</b>:
+{% if bulletin.tags is not empty %}
+{% for tag in bulletin.tags %}
+  <a href="{{path('index_tag', {'tagId': tag.name}) }}">{{ tag.name}}</a>; 
+{% endfor %}
+{% else %}
+<i>Aucun.</i>
+{% endif %}
+</p>
+<p class="lead"> Le {{ bulletin.creationDate|date("d/m/Y à G:i:s", "Europe/Paris") }}</p>
+<a href="{{path('bulletin_delete',{'bulletinId' : bulletin.id }) }}"class="btn btn-danger"  type="button"> supprimer </a>
+<a href="{{path('bulletin_update',{'bulletinId' : bulletin.id }) }}"class="btn btn-warning" type="button"> Modifier </a>
+<a href="{{path('bulletin_display',{'bulletinId' : bulletin.id }) }}"class="btn btn-info" type="button"> Afficher </a>
+</div>
+{% endfor %}
+</div>
+{% endblock %}
